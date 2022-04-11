@@ -3,6 +3,7 @@ use std::cmp;
 use super::lcs_errors::{LcsValueNotFound};
 
 /// represents grid to calculate Longest Common Secuence
+#[derive(Debug)]
 struct LcsGrid {
     cells: Vec<Vec<u32>>
 }
@@ -32,7 +33,9 @@ impl LcsGrid {
     }
 
     fn save_value_to(& mut self, i: usize, j: usize, value: u32) {
-        if let Some(cell) = self.cells.get_mut(i) { cell.insert(j, value) }
+        if let Some(cell) = self.cells.get_mut(i) { 
+            cell[j] = value;
+        }
     }
 
     pub fn from_vecs_of_strings(file_lines_1: &[String], file_lines_2: &[String]) -> LcsGrid {

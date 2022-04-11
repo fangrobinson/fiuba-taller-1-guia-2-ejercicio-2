@@ -24,3 +24,20 @@ pub fn read_file_lines(filename: impl AsRef<Path>) -> Result<Vec<String>, CoulNo
         .map(|l| handle_line_reading(l))
         .collect();
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn reading_file_that_does_not_exist_should_error() {
+        assert!(read_file_lines("./file_that_does_not_exist.txt").is_err());
+    }
+
+    #[test]
+    fn reading_file_that_doest_exist_should_ok() {
+        assert!(read_file_lines("../Cargo.lock").is_err());
+    }
+
+}
