@@ -18,7 +18,6 @@ pub fn read_file_lines(filename: impl AsRef<Path>) -> Result<Vec<String>, CoulNo
         Ok(f) => f,
         Err(_) => return Err(CoulNotOpenFile),
     };
-    let mut output: Vec<String> = Vec::<String>::new();
 
     return BufReader::new(file)
         .lines()
