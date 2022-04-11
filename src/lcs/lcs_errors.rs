@@ -1,5 +1,7 @@
+//! Contains LCS Grid related errors.
 use std::fmt;
 
+/// Error to throw when non valid access is attempted (e.g. access to cell outside indexes).
 #[derive(Debug, Clone)]
 pub struct LcsValueNotFound;
 
@@ -9,6 +11,7 @@ impl fmt::Display for LcsValueNotFound {
     }
 }
 
+/// Error to throw when LCS Grid could not be created (e.g. LcsValueNotFound error was reached).
 #[derive(Debug, Clone)]
 pub struct CouldNotCreateLcsGrid;
 

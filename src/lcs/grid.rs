@@ -1,3 +1,4 @@
+//! Contains LCS grid implementation.
 use std::cmp;
 
 use super::lcs_errors::{CouldNotCreateLcsGrid, LcsValueNotFound};
@@ -8,7 +9,9 @@ pub struct LcsGrid {
     pub cells: Vec<Vec<u32>>,
 }
 
+/// LCS Grid implementation.
 impl LcsGrid {
+    /// Private constructure of uninitialized LCS grid.
     fn new(i: usize, j: usize) -> LcsGrid {
         let mut grid: Vec<Vec<u32>> = Vec::<Vec<u32>>::new();
         for _i in 0..i + 1 {
@@ -18,6 +21,10 @@ impl LcsGrid {
         LcsGrid { cells: grid }
     }
 
+    /// Convinient function to access value of a [i, j] cell in LCS grid.
+    ///
+    /// Throws:
+    ///  - LcsValueNotFound if invalid indexes were used.
     pub fn get_value_from(&self, i: usize, j: usize) -> Result<u32, LcsValueNotFound> {
         let row: &Vec<u32> = match self.cells.get(i) {
             Some(r) => r,
@@ -25,17 +32,23 @@ impl LcsGrid {
         };
 
         match row.get(j) {
-            Some(v) => return Ok(*v),
-            None => return Err(LcsValueNotFound),
+            Some(v) => Ok(*v),
+            None => Err(LcsValueNotFound),
         }
     }
 
+    /// Convinient private function to save value in [i, j] cell in LCS grid.
+    ///
+    /// Does nothing on wrong indexes.
+    ///
+    /// This should only be used on LCS Grid initialization.
     fn save_value_to(&mut self, i: usize, j: usize, value: u32) {
         if let Some(cell) = self.cells.get_mut(i) {
             cell[j] = value;
         }
     }
 
+    /// Convenient constructor of LCS Grid from two Vec<String>.
     pub fn from_vecs_of_strings(
         file_lines_1: &[String],
         file_lines_2: &[String],

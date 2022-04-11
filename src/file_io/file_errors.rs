@@ -1,5 +1,7 @@
+//! Contains IO errors.
 use std::fmt;
 
+/// Error to throw when diff could not run (e.g. file does not exist).
 #[derive(Debug, Clone)]
 pub struct CoulNotOpenFile;
 
