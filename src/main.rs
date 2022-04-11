@@ -1,13 +1,11 @@
-use std::{
-    env,
-};
+use std::env;
 
 mod file_io;
 use file_io::file_reader as files;
 
 mod lcs;
 
-fn main() -> Result<(), file_io::file_errors::CoulNotOpenFile>{
+fn main() -> Result<(), file_io::file_errors::CoulNotOpenFile> {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
         println!("cantitdad incorrecta de argumentos");

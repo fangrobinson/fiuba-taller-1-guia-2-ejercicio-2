@@ -1,23 +1,21 @@
 use std::cmp;
 
-use super::lcs_errors::{LcsValueNotFound};
+use super::lcs_errors::LcsValueNotFound;
 
 /// represents grid to calculate Longest Common Secuence
 #[derive(Debug)]
 struct LcsGrid {
-    cells: Vec<Vec<u32>>
+    cells: Vec<Vec<u32>>,
 }
 
 impl LcsGrid {
     fn new(i: usize, j: usize) -> LcsGrid {
         let mut grid: Vec<Vec<u32>> = Vec::<Vec<u32>>::new();
-        for i in 0..i+1 {
-            let value: Vec<u32> = vec![0; j+1];
+        for i in 0..i + 1 {
+            let value: Vec<u32> = vec![0; j + 1];
             grid.push(value);
         }
-        LcsGrid {
-            cells: grid
-        }
+        LcsGrid { cells: grid }
     }
 
     fn get_value_from(&self, i: usize, j: usize) -> Result<u32, LcsValueNotFound> {
@@ -32,8 +30,8 @@ impl LcsGrid {
         }
     }
 
-    fn save_value_to(& mut self, i: usize, j: usize, value: u32) {
-        if let Some(cell) = self.cells.get_mut(i) { 
+    fn save_value_to(&mut self, i: usize, j: usize, value: u32) {
+        if let Some(cell) = self.cells.get_mut(i) {
             cell[j] = value;
         }
     }
@@ -44,7 +42,7 @@ impl LcsGrid {
         for i in 0..file_lines_1.len() {
             for j in 0..file_lines_2.len() {
                 if file_lines_1.get(i).eq(&file_lines_2.get(j)) {
-                    let value: u32 = grid.get_value_from(i + 1, j + 1).unwrap() + 1;  
+                    let value: u32 = grid.get_value_from(i + 1, j + 1).unwrap() + 1;
                     grid.save_value_to(i + 1, j + 1, value);
                 } else {
                     let v1: u32 = grid.get_value_from(i + 1, j).unwrap();
@@ -68,7 +66,7 @@ mod tests {
         let grid = LcsGrid::new(i, j);
         assert_eq!(grid.cells.len(), i + 1);
         for row in grid.cells {
-            assert_eq!(row.len(), j+1);
+            assert_eq!(row.len(), j + 1);
         }
     }
 
