@@ -32,13 +32,15 @@ fn check_last_diagonal_pos(
 ///
 ///  - bool with condition result.
 fn check_west_is_higher(g: &grid::LcsGrid, i: usize, j: usize) -> bool {
-    if i == 0 || j == 0 {
+    if j == 0 {
         return false;
     }
-    let i_equals_zero = i == 0;
+    if i == 0 {
+        return true;
+    }
     let grid_v_1 = g.cells[i][j - 1];
     let grid_v_2 = g.cells[i - 1][j];
-    i_equals_zero || grid_v_1 >= grid_v_2
+    grid_v_1 >= grid_v_2
 }
 
 /// Convenience function to check if left LCS grid value is lower than up value.
@@ -47,13 +49,15 @@ fn check_west_is_higher(g: &grid::LcsGrid, i: usize, j: usize) -> bool {
 ///
 ///  - bool with condition result.
 fn check_north_is_higher(g: &grid::LcsGrid, i: usize, j: usize) -> bool {
-    if j == 0 || i == 0 {
+    if i == 0 {
         return false;
     }
-    let j_equals_zero = j == 0;
+    if j == 0 {
+        return true;
+    }
     let grid_v_1 = g.cells[i][j - 1];
     let grid_v_2 = g.cells[i - 1][j];
-    j_equals_zero || grid_v_1 < grid_v_2
+    grid_v_1 < grid_v_2
 }
 
 /// Recursive function to print files diff

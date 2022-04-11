@@ -58,7 +58,7 @@ impl LcsGrid {
         for i in 0..file_lines_1.len() {
             for j in 0..file_lines_2.len() {
                 if file_lines_1.get(i).eq(&file_lines_2.get(j)) {
-                    let value: u32 = match grid.get_value_from(i + 1, j + 1) {
+                    let value: u32 = match grid.get_value_from(i, j) {
                         Ok(v) => v + 1,
                         Err(LcsValueNotFound) => return Err(CouldNotCreateLcsGrid),
                     };
